@@ -1,0 +1,20 @@
+<div class="shell">
+  <aside class="sidebar">
+    <a routerLink="/" class="brand"><span class="logo">E</span><span>EmployeeHub</span></a>
+    <nav>
+      @for (n of nav; track n.path) {
+        <a [routerLink]="n.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: n.exact }">
+          <span class="ico">{{ n.icon }}</span><span class="lbl">{{ n.label }}</span>
+        </a>
+      }
+    </nav>
+  </aside>
+
+  <main class="content"><router-outlet /></main>
+</div>
+
+<div class="toasts" aria-live="polite">
+  @for (t of toast.toasts(); track t.id) {
+    <div class="toast" [class.err]="t.type === 'error'" (click)="toast.dismiss(t.id)">{{ t.text }}</div>
+  }
+</div>
